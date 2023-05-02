@@ -51,4 +51,12 @@ export class InMemoryPets implements PetRepository{
     return pets
   }
 
+  async findPetInOrganizationById(orgId: string){
+      const pet = this.items.find((item) => item.organization_id === orgId)
+      if(!pet){
+        return null
+      }
+      return pet
+  }
+
 }

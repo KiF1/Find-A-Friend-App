@@ -43,8 +43,10 @@ model Organization {
   password_hash String
   description   String?
   phone         String
-  latitude      Decimal
-  longitude     Decimal
+  city          String
+  address       String
+  state         String
+  cep           String
   pets          Pet[]
 
   @@map("organizations")
