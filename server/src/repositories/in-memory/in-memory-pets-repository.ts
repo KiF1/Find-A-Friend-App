@@ -1,8 +1,8 @@
 import { Prisma, Pet } from "@prisma/client";
-import { FilterByCaractristcs, PetRepository } from "../interface/pets-repository";
+import { PetRepository } from "../interface/pets-repository";
 import { randomUUID } from "crypto";
 
-export class InMemoryPets implements PetRepository{
+export class InMemoryPetsRepository implements PetRepository{
   public items: Pet[] = []  
 
   async create(data: Prisma.PetUncheckedCreateInput){
@@ -37,18 +37,6 @@ export class InMemoryPets implements PetRepository{
       return null
     }
     return pet
-  }
-
-  async filterByCaracteristics(params: FilterByCaractristcs, page: number){
-    const pets = await this.items.filter((item) => {
-      for(const key in params){
-        if(item[key as keyof Pet] !== params[key as keyof FilterByCaractristcs]){
-          return false
-        }
-      }
-      return true
-    }).slice((page - 1) * 20, page * 20)
-    return pets
   }
 
   async findPetInOrganizationById(orgId: string){

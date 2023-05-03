@@ -1,4 +1,4 @@
-import { Organization, Pet, Prisma } from "@prisma/client";
+import { Organization, Prisma } from "@prisma/client";
 
 export interface OrganizationRepository {
   findById(id: string): Promise<Organization | null>
