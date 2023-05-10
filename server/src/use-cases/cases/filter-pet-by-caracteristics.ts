@@ -23,13 +23,13 @@ interface FilterPetByCaracteristicsUseCaseResponse{
 export class FilterPetByCaracteristicUseCase{
   constructor(private organizationsRepository: OrganizationRepository, private petsRepository: PetRepository){}
 
-  async execute({ state, city ,params, page }: FilterPetByCaracteristicsUseCaseRequest): Promise<FilterPetByCaracteristicsUseCaseResponse>{
-    const organizationsNearby = await this.organizationsRepository.findManyNearby(state, city);
-    const petsInOrganization = await Promise.all(organizationsNearby.map(organization => {
-      return this.petsRepository.findPetInOrganizationById(organization.id);
-    }));
-    const filteredPetsNearby = petsInOrganization.filter((pet): pet is Pet => pet !== null);
-    const pets = await filteredPetsNearby.filter((item) => {
+  async execute({ state, city, params, page }: FilterPetByCaracteristicsUseCaseRequest): Promise<FilterPetByCaracteristicsUseCaseResponse>{
+    const organizations = await this.organizationsRepository.findManyNearby(state, city);
+    const petsNearby = (await Promise.all(organizations?.map(async (organization) => {
+        return this.petsRepository.findPetInOrganizationById(organization.id);
+      }) ?? []
+    )).flat();
+    const pets = await petsNearby.filter((item) => {
       for(const key in params){
         if(item[key as keyof Pet] !== params[key as keyof FilterByCaractristcs]){
           return false

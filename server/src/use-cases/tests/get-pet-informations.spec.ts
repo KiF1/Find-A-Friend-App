@@ -4,19 +4,25 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { CreatePetUseCase } from '../cases/create-pet'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
-import { OrganizationNotExists } from '../errors/organization-not-exists'
+import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
+import { GetPetInformationsUseCase } from '../cases/get-pet-informations'
 
 
 let petRepository: InMemoryPetsRepository
 let organizationRepository: InMemoryOrganizationsRepository
-let sut: CreatePetUseCase
+let createPet: CreatePetUseCase
+let sut: GetPetInformationsUseCase
 
 describe('Register Pet Use Case', () => {
   beforeEach(async () => {
     petRepository = new InMemoryPetsRepository();
     organizationRepository = new InMemoryOrganizationsRepository()
-    sut = new CreatePetUseCase(petRepository, organizationRepository);
+    createPet = new CreatePetUseCase(petRepository, organizationRepository)
+    sut = new GetPetInformationsUseCase(petRepository);
 
+  })
+
+  it('Should be able to get a specific Pet', async () => {
     await organizationRepository.create({
       id: 'organization-1',
       name: 'JavaScript Dogs',
@@ -29,11 +35,10 @@ describe('Register Pet Use Case', () => {
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
     })
-  })
 
-  it('Should be able to create Pet', async () => {
-    const { pet } = await sut.execute({
-      name: 'Typescript',
+    await createPet.execute({
+      id: 'pet-01',
+      name: 'Rust',
       description: 'Golden Retrivier',
       age: 'filhote',
       size: 'pequeno',
@@ -44,21 +49,16 @@ describe('Register Pet Use Case', () => {
       organization_id: 'organization-1',
       photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
     })
-    expect(pet.id).toEqual(expect.any(String));
+
+    const { pet } = await sut.execute({
+      id: 'pet-01'
+    })
+    expect(pet).toEqual(expect.objectContaining({ name: 'Rust' }))
   })
 
-  it('Should not be able to create Pet', async () => {
+  it('Should not be able to get a specific Pet', async () => {
     await expect(() => sut.execute({
-      name: 'Typescript',
-      description: 'Golden Retrivier',
-      age: 'filhote',
-      size: 'pequeno',
-      energy_level: 'Baixa',
-      dependency_level: 'Baixa',
-      environment: 'grande',
-      requirements: ['ambiente amplo', 'ambiente receptivo'],
-      organization_id: 'organization-2',
-      photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
-    })).rejects.toBeInstanceOf(OrganizationNotExists)
+      id: 'pet-02',
+    })).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 })

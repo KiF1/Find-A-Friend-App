@@ -4,6 +4,7 @@ import { OrganizationRepository } from "@/repositories/interface/organizations-r
 import { OrganizationNotExists } from "../errors/organization-not-exists";
 
 interface CreatePetUseCaseRequest {
+  id?: string;
   name: string;
   description: string | null;
   age: string;
@@ -23,15 +24,15 @@ interface CreatePetUseCaseResponse {
 export class CreatePetUseCase {
   constructor( private petRepository: PetRepository, private organizationRepository: OrganizationRepository) {}
 
-  async execute({ name, age, dependency_level, description, energy_level, environment, organization_id, photos, requirements, size }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
+  async execute({ id, name, age, dependency_level, description, energy_level, environment, organization_id, photos, requirements, size }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
     const organization = await this.organizationRepository.findById(
       organization_id
     );
     if (!organization) {
       throw new OrganizationNotExists();
     }
-
-    const pet = await this.petRepository.create({ name, age, dependency_level, description, energy_level, environment, organization_id, photos, requirements, size });
+    
+    const pet = await this.petRepository.create({ id, name, age, dependency_level, description, energy_level, environment, organization_id, photos, requirements, size });
     return { pet };
   }
 }

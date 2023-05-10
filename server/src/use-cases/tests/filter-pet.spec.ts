@@ -1,23 +1,27 @@
 
 import { InMemoryPetsRepository } from '../../repositories/in-memory/in-memory-pets-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { CreatePetUseCase } from '../cases/create-pet'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
-import { OrganizationNotExists } from '../errors/organization-not-exists'
+import { CreatePetUseCase } from '../cases/create-pet'
+import { FilterPetByCaracteristicUseCase } from '../cases/filter-pet-by-caracteristics'
 
 
-let petRepository: InMemoryPetsRepository
-let organizationRepository: InMemoryOrganizationsRepository
-let sut: CreatePetUseCase
+let organizationsRepository: InMemoryOrganizationsRepository
+let petsRepository: InMemoryPetsRepository
+let createPet: CreatePetUseCase
+let sut: FilterPetByCaracteristicUseCase
 
-describe('Register Pet Use Case', () => {
+describe('Fetch Nearby Pet Use Case', () => {
   beforeEach(async () => {
-    petRepository = new InMemoryPetsRepository();
-    organizationRepository = new InMemoryOrganizationsRepository()
-    sut = new CreatePetUseCase(petRepository, organizationRepository);
+    organizationsRepository = new InMemoryOrganizationsRepository()
+    petsRepository = new InMemoryPetsRepository();
+    createPet = new CreatePetUseCase(petsRepository, organizationsRepository)
+    sut = new FilterPetByCaracteristicUseCase(organizationsRepository, petsRepository);
+  })
 
-    await organizationRepository.create({
+  it('Should be able to Filter Pets with caracteristics', async () => {
+    await organizationsRepository.create({
       id: 'organization-1',
       name: 'JavaScript Dogs',
       description: 'JavaScript Organization',
@@ -29,13 +33,24 @@ describe('Register Pet Use Case', () => {
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
     })
-  })
 
-  it('Should be able to create Pet', async () => {
-    const { pet } = await sut.execute({
-      name: 'Typescript',
+    await createPet.execute({
+      name: 'Rust',
       description: 'Golden Retrivier',
-      age: 'filhote',
+      age: 'Adulto',
+      size: 'Médio',
+      energy_level: 'Baixa',
+      dependency_level: 'Baixa',
+      environment: 'grande',
+      requirements: ['ambiente amplo', 'ambiente receptivo'],
+      organization_id: 'organization-1',
+      photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
+    })
+
+    await createPet.execute({
+      name: 'Zephyr',
+      description: 'Golden Retrivier',
+      age: 'Adulto',
       size: 'pequeno',
       energy_level: 'Baixa',
       dependency_level: 'Baixa',
@@ -44,21 +59,17 @@ describe('Register Pet Use Case', () => {
       organization_id: 'organization-1',
       photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
     })
-    expect(pet.id).toEqual(expect.any(String));
-  })
 
-  it('Should not be able to create Pet', async () => {
-    await expect(() => sut.execute({
-      name: 'Typescript',
-      description: 'Golden Retrivier',
-      age: 'filhote',
-      size: 'pequeno',
-      energy_level: 'Baixa',
-      dependency_level: 'Baixa',
-      environment: 'grande',
-      requirements: ['ambiente amplo', 'ambiente receptivo'],
-      organization_id: 'organization-2',
-      photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
-    })).rejects.toBeInstanceOf(OrganizationNotExists)
+    const { pets } = await sut.execute({
+      state: 'Pernambuco',
+      city: 'Olinda',
+      page: 1,
+      params: {
+        age: 'Adulto',
+        size: 'Médio'
+      }
+    })
+
+    expect(pets).toHaveLength(1)
   })
 })

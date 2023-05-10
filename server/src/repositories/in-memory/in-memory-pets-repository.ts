@@ -16,16 +16,17 @@ export class InMemoryPetsRepository implements PetRepository{
       dependency_level: data.dependency_level,
       environment: data.environment,
       requirements: typeof data.requirements === 'string' ? [data.requirements] : [],
-      photos: data.photos,
+      photos: typeof data.photos === 'string' ? [data.photos] : [],
       organization_id: data.organization_id,
       created_at: new Date(),
     }
     this.items.push(pet)
     return pet
   }
+
   async edit(id: string, data: Prisma.PetUncheckedCreateInput){
     const pet = await this.items.findIndex((item) => item.id === id);
-    const updatedPet = { ...this.items[pet], ...data, requirements: typeof data.requirements === 'string' ? [data.requirements] : [], created_at: new Date() };
+    const updatedPet = { ...this.items[pet], ...data, photos: typeof data.photos === 'string' ? [data.photos] : [] , requirements: typeof data.requirements === 'string' ? [data.requirements] : [], created_at: new Date() };
     this.items.splice(pet, 1, updatedPet);
 
     return updatedPet
@@ -40,10 +41,7 @@ export class InMemoryPetsRepository implements PetRepository{
   }
 
   async findPetInOrganizationById(orgId: string){
-      const pet = this.items.find((item) => item.organization_id === orgId)
-      if(!pet){
-        return null
-      }
+      const pet = this.items.filter((item) => item.organization_id === orgId)
       return pet
   }
 

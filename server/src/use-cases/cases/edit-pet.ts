@@ -1,15 +1,15 @@
-import { Pet } from "@prisma/client"
+import { Pet, Prisma } from "@prisma/client"
 import { PetRepository } from "@/repositories/interface/pets-repository"
 import { InvalidCredentialsError } from "../errors/invalid-credentials-error"
 
 
 interface EditPetUseCaseRequest {
   id: string
-  data: Pet
+  data: Prisma.PetUpdateInput
 }
 
 interface EditPetUseCaseResponse{
-  petCreated: Pet
+  petEdited: Pet
 }
 
 export class EditPetUseCase{
@@ -21,7 +21,7 @@ export class EditPetUseCase{
       throw new InvalidCredentialsError()
     }
 
-    const petCreated = await this.petsRepository.edit(id, data);
-    return { petCreated }
+    const petEdited = await this.petsRepository.edit(id, data);
+    return { petEdited }
   }
 }

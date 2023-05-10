@@ -22,7 +22,10 @@ export class InMemoryOrganizationsRepository implements OrganizationRepository{
   }
 
   async findManyNearby(state: string, city: string){
-    const organizations = await  this.items.filter((item) => item.state && item.city === state && city);
+    const organizations = await this.items.filter((item) => item.state === state && item.city === city);
+    if(!organizations){
+      return null
+    }
     return organizations
   }
 

@@ -8,7 +8,7 @@ interface FetchNearbyPetsUseCaseRequest {
 }
 
 interface FetchNearbyPetsUseCaseResponse{
-  petsNearby: Pet[]
+  pets: Pet[] | null
 }
 
 export class FetchNearbyPetUseCase{
@@ -16,11 +16,12 @@ export class FetchNearbyPetUseCase{
 
   async execute({ state, city }: FetchNearbyPetsUseCaseRequest): Promise<FetchNearbyPetsUseCaseResponse>{
     const organizations = await this.organizationsRepository.findManyNearby(state, city);
-    const pets = await Promise.all(organizations.map(organization => {
-      return this.petsRepository.findPetInOrganizationById(organization.id);
-    }));
-    const petsNearby = pets.filter((pet): pet is Pet => pet !== null);
+    const pets = (await Promise.all(organizations?.map(async (organization) => {
+        return this.petsRepository.findPetInOrganizationById(organization.id);
+      }) ?? []
+    )).flat();
+  
 
-    return { petsNearby };
+    return { pets };
   }
 }
