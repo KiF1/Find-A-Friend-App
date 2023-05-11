@@ -13,7 +13,7 @@ let organizationRepository: InMemoryOrganizationsRepository
 let createPet: CreatePetUseCase
 let sut: GetPetInformationsUseCase
 
-describe('Register Pet Use Case', () => {
+describe('Get Informations Pet Use Case', () => {
   beforeEach(async () => {
     petRepository = new InMemoryPetsRepository();
     organizationRepository = new InMemoryOrganizationsRepository()

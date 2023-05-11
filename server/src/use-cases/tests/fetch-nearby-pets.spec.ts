@@ -63,6 +63,7 @@ describe('Fetch Nearby Pet Use Case', () => {
     const { pets } = await sut.execute({
       state: 'Pernambuco',
       city: 'Olinda',
+      page: 1
     })
 
     expect(pets).toHaveLength(2)

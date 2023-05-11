@@ -5,7 +5,7 @@ import { InvalidCredentialsError } from "../errors/invalid-credentials-error"
 
 interface EditPetUseCaseRequest {
   id: string
-  data: Prisma.PetUpdateInput
+  data: Prisma.PetUncheckedCreateInput
 }
 
 interface EditPetUseCaseResponse{

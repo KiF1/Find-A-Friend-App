@@ -40,8 +40,8 @@ export class InMemoryPetsRepository implements PetRepository{
     return pet
   }
 
-  async findPetInOrganizationById(orgId: string){
-      const pet = this.items.filter((item) => item.organization_id === orgId)
+  async findPetsInOrganizationById(orgId: string, page: number){
+      const pet = this.items.filter((item) => item.organization_id === orgId).slice((page - 1) * 20, page * 20)
       return pet
   }
 
