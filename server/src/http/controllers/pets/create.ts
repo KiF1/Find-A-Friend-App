@@ -1,4 +1,4 @@
-import { makeCreatePetUseCase } from "@/use-cases/factories/make-create-pet-use-case";
+import { makeCreatePetUseCase } from "../../../use-cases/factories/make-create-pet-use-case";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 

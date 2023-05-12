@@ -1,4 +1,4 @@
-import { makeGetPetInformationsUseCase } from "@/use-cases/factories/make-get-pet-informations";
+import { makeGetPetInformationsUseCase } from "../../../use-cases/factories/make-get-pet-informations";
 import { FastifyRequest, FastifyReply } from "fastify";
 
 export async function profile(request: FastifyRequest, reply: FastifyReply){

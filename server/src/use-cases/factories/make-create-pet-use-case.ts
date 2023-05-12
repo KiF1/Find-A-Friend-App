@@ -1,6 +1,6 @@
-import { PrismaPetsRepository } from "@/repositories/prisma/prisma-pets-repository";
+import { PrismaPetsRepository } from "../../repositories/prisma/prisma-pets-repository";
 import { CreatePetUseCase } from "../cases/create-pet";
-import { PrismaOrganizationRepository } from "@/repositories/prisma/prisma-organizations-repository";
+import { PrismaOrganizationRepository } from "../../repositories/prisma/prisma-organizations-repository";
 
 export function makeCreatePetUseCase(){
   const organizationsReporitory = new PrismaOrganizationRepository();

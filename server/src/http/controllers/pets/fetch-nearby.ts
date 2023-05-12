@@ -1,4 +1,4 @@
-import { makeFetchNearbyPetUseCase } from "@/use-cases/factories/make-fetch-nearby-pets";
+import { makeFetchNearbyPetUseCase } from "../../../use-cases/factories/make-fetch-nearby-pets";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 

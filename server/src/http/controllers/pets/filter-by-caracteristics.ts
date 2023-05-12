@@ -1,4 +1,4 @@
-import { makeFilterPetByCaracteristicsUseCase } from "@/use-cases/factories/make-filter-pet-by-caracteristics";
+import { makeFilterPetByCaracteristicsUseCase } from "../../../use-cases/factories/make-filter-pet-by-caracteristics";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 

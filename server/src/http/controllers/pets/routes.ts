@@ -1,14 +1,14 @@
 import { FastifyInstance } from "fastify";
-import { verifyJwt } from "@/http/middlewares/verify-jwt";
+import { verifyJwt } from "../../../http/middlewares/verify-jwt";
 import { profile } from "./profile";
 import { create } from "./create";
 import { edit } from "./edit";
 import { fetchNearbyPets } from "./fetch-nearby";
 import { filterPetByCaracteristics } from "./filter-by-caracteristics";
 import multer from "fastify-multer";
-import upload from "@/config/upload";
+import upload from "../../../config/upload";
 
-export async function organizationsRoutes(app: FastifyInstance){
+export async function petsRoutes(app: FastifyInstance){
   const uploadPet = multer(upload);
 
 

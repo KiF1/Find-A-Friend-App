@@ -1,4 +1,4 @@
-import { PrismaOrganizationRepository } from "@/repositories/prisma/prisma-organizations-repository";
+import { PrismaOrganizationRepository } from "../../repositories/prisma/prisma-organizations-repository";
 import { GetOrganizationInformationsUseCase } from "../cases/get-organization-informations";
 
 export function makeGetOrganizationInformationsUseCase(){

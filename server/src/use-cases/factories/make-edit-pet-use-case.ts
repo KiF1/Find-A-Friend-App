@@ -1,4 +1,4 @@
-import { PrismaPetsRepository } from "@/repositories/prisma/prisma-pets-repository";
+import { PrismaPetsRepository } from "../../repositories/prisma/prisma-pets-repository";
 import { EditPetUseCase } from "../cases/edit-pet";
 
 export function makeEditPetUseCase(){
