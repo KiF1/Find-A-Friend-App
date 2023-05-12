@@ -11,5 +11,5 @@ export async function organizationsRoutes(app: FastifyInstance){
 
   app.patch('/token/refresh', refresh)
 
-  app.get('/organization', { onRequest: [verifyJwt] }, profile)
+  app.get('/organization/:id', { onRequest: [verifyJwt] }, profile)
 }
