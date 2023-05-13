@@ -14,7 +14,7 @@ export async function petsRoutes(app: FastifyInstance){
 
   app.post('/pets', { onRequest: [verifyJwt, uploadPet.array("photos")] }, create);
 
-  app.put('/pets', { onRequest: [verifyJwt] },  edit)
+  app.put('/pets/:id', { onRequest: [verifyJwt] }, edit)
 
   app.get('/pets/nearby', fetchNearbyPets)
   app.get('/pets/filtered', filterPetByCaracteristics)

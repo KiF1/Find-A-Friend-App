@@ -9,7 +9,8 @@ export async function fetchNearbyPets(request: FastifyRequest, reply: FastifyRep
     page: z.number()
   })
 
-  const { state, city, page } = FetchNearbyBodySchema.parse(request.body);
+  const { state, city, page } = FetchNearbyBodySchema.parse(request.query);
+  console.log(state, city, page)
   const FetchNearbyPetUseCase = makeFetchNearbyPetUseCase();
   await FetchNearbyPetUseCase.execute({ state, city, page })
   

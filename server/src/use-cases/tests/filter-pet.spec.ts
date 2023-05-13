@@ -64,10 +64,8 @@ describe('Fetch Nearby Pet Use Case', () => {
       state: 'Pernambuco',
       city: 'Olinda',
       page: 1,
-      params: {
-        age: 'Adulto',
-        size: 'Médio'
-      }
+      age: 'Adulto',
+      size: 'Médio'
     })
 
     expect(pets).toHaveLength(1)
