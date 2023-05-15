@@ -16,8 +16,8 @@ describe('Fetch Nearby Pet (e2e)', () => {
     const { idOrganization, token } = await createAndAuthenticateOrganization(app)
 
     await request(app.server).post('/pets').set('Authorization', `Bearer ${token}`).send({
-      name: 'Pitbull',
-      description: 'Pitbull',
+      name: 'Vira Lata',
+      description: 'Vira Lata',
       age: 'filhote',
       size: 'pequeno',
       energy_level: 'Baixa',
@@ -29,8 +29,8 @@ describe('Fetch Nearby Pet (e2e)', () => {
     })
 
     await request(app.server).post('/pets').set('Authorization', `Bearer ${token}`).send({
-      name: 'Caramelo',
-      description: 'Caramelo',
+      name: 'Pudou',
+      description: 'Pudou',
       age: 'filhote',
       size: 'pequeno',
       energy_level: 'Baixa',
@@ -41,10 +41,10 @@ describe('Fetch Nearby Pet (e2e)', () => {
       photos: ['https://localhost:4000.png', 'https://localhost:4000.png']
     })
 
-    const petResponse = await request(app.server).get('/pets/nearby?state=Pernambuco&city=Olinda&page=1').set('Authorization', `Bearer ${token}`).send({})
+    const petResponse = await request(app.server).get('/pets/nearby?filtered=Pernambuco&city=Olinda&page=1&size=pequeno&dependency_level=baixa').set('Authorization', `Bearer ${token}`).send({})
     expect(petResponse.statusCode).toEqual(200);
     expect(petResponse.body.pets).toEqual(expect.objectContaining({
-      name: 'Caramelo'
+      name: 'Pudou'
     }))
   })
 })

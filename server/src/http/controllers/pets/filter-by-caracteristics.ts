@@ -15,7 +15,7 @@ export async function filterPetByCaracteristics(request: FastifyRequest, reply: 
 
   const { state, city, page, age, dependency_level, energy, size } = FetchNearbyBodySchema.parse(request.query);
   const filterPetByCaracteristicsUseCase = makeFilterPetByCaracteristicsUseCase();
-  await filterPetByCaracteristicsUseCase.execute({ state, city, page, age, dependency_level, energy, size })
+  const { pets } = await filterPetByCaracteristicsUseCase.execute({ state, city, page, age, dependency_level, energy, size })
   
-  return reply.status(200).send()
+  return reply.status(200).send({ pets })
 }
