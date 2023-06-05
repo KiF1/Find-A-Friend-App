@@ -17,10 +17,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
   })
 
   const { name, age, dependency_level, description, energy_level, environment, organization_id, requirements, size, photos } = registerBodySchema.parse(request.body);
-  
-  // const pet_file = request.files["photos"]?.[0]?.filename;
-  // const photosPet = pet_file ? pet_file : photos;
-  // console.log(photosPet)
 
   const createPetUseCase = makeCreatePetUseCase();
   await createPetUseCase.execute({ name, age, dependency_level, description, energy_level, environment, organization_id, requirements, size, photos })

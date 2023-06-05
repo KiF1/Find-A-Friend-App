@@ -5,14 +5,11 @@ import { create } from "./create";
 import { edit } from "./edit";
 import { fetchNearbyPets } from "./fetch-nearby";
 import { filterPetByCaracteristics } from "./filter-by-caracteristics";
-import multer from "fastify-multer";
-import upload from "../../../config/upload";
+import { uploadPet } from "./upload-pet";
 
 export async function petsRoutes(app: FastifyInstance){
-  const uploadPet = multer(upload);
-
-
-  app.post('/pets', { onRequest: [verifyJwt, uploadPet.array("photos")] }, create);
+  app.post('/pets', { onRequest: [verifyJwt] }, create);
+  app.post('/pets/upload', { onRequest: [verifyJwt] }, uploadPet);
 
   app.put('/pets/:id', { onRequest: [verifyJwt] }, edit)
 
