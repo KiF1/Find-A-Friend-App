@@ -8,11 +8,7 @@ import { promisify } from 'node:util'
 const pump = promisify(pipeline);
 
 export async function uploadLogo(request: FastifyRequest, reply: FastifyReply) {
-    const upload = await request.file({
-      limits: {
-        fileSize: 5_242_880 // 5 Mb
-      },
-    })
+    const upload = await request.file()
     if(!upload){
       return reply.status(400).send()
     }
