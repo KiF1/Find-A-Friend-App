@@ -6,7 +6,25 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: 'var(--font-roboto)',
+        alt: 'var(--font-bai-jamjuree)',
+      },
+
+      colors: {
+        red: {
+          50: '#F15156',
+          100: '#E44449',
+        },
+        orange: '#F27006',
+        yellow:  '#F4D35E',
+        green: '#3CDC8C',
+        blue: '#0D3B66',
+        gray: '#D3E2E5',
+        purple: '#633BBC'
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
