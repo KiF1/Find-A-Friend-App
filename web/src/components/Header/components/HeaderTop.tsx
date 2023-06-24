@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import logo from "../assets/logo.png";
+import logo from "../../../assets/logo.png"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -14,18 +14,16 @@ const citySchema = z.object({
 
 type citySearch = z.infer<typeof citySchema>
 
-export function HeaderNearby(){
+export function HeaderTop(){
   const { register } = useForm<citySearch>({
     resolver: zodResolver(citySchema),
   });
 
-  return(
-    <div className="flex flex-col p-6">
-      <div className="flex flex-col gap-4 bg-red-100">
-        <Image width={20} height={20} alt="logo" src={logo} />
+  return (
+    <div className="flex p-12 flex-col gap-8 bg-red-100">
+        <Image width={50} height={50} alt="logo" src={logo} />
         <div className="flex items-center justify-between gap-2">
-          <select {...register('state')} className="h-12 rounded-2xl border-transparent bg-red-100 p-2 text-center text-white placeholder-white focus:border-transparent focus:ring-0" id="estado" name="estado">
-            <option value="" selected disabled>Selecione um estado</option>
+          <select {...register('state')} className="w-20 h-12 border-[0.5px] rounded-2xl appearance-none border-white bg-red-100 text-center text-white placeholder-white focus:border-white focus:ring-0" id="estado" name="estado">
             <option value="Acre">AC</option>
             <option value="Alagoas">AL</option>
             <option value="Amapá">AP</option>
@@ -55,7 +53,7 @@ export function HeaderNearby(){
             <option value="Tocantins">TO</option>
           </select>
           <input {...register('city')}
-            className="h-12 rounded-2xl border-transparent bg-red-100 p-4 text-center text-white placeholder-white focus:border-transparent focus:ring-0"
+            className="h-12 rounded-2xl border-white bg-red-100 p-4 text-center text-white placeholder-white focus:border-white focus:ring-0"
             type="text"
             placeholder="Insira o nome da cidade"
           />
@@ -64,6 +62,5 @@ export function HeaderNearby(){
           </button>
         </div>
       </div>
-    </div>
   )
 }
