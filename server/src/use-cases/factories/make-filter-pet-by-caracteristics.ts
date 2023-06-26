@@ -4,7 +4,7 @@ import { FilterPetByCaracteristicUseCase } from "../cases/filter-pet-by-caracter
 
 export function makeFilterPetByCaracteristicsUseCase(){
   const organizationsReporitory = new PrismaOrganizationRepository();
-  const petRepository = new PrismaPetsRepository();
-  const useCase = new FilterPetByCaracteristicUseCase(organizationsReporitory, petRepository);
+  const petsRepository = new PrismaPetsRepository();
+  const useCase = new FilterPetByCaracteristicUseCase(organizationsReporitory, petsRepository);
   return useCase;
 }

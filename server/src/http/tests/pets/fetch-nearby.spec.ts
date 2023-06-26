@@ -43,8 +43,6 @@ describe('Fetch Nearby Pet (e2e)', () => {
 
     const petResponse = await request(app.server).get('/pets/nearby?state=Pernambuco&city=Olinda&page=1').set('Authorization', `Bearer ${token}`).send({})
     expect(petResponse.statusCode).toEqual(200);
-    expect(petResponse.body.pets).toEqual(expect.objectContaining({
-      name: 'Caramelo'
-    }))
+    expect(petResponse.body.pets).toHaveLength(2)
   })
 })

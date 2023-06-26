@@ -9,6 +9,5 @@ export async function profile(request: FastifyRequest, reply: FastifyReply){
   const { id } = getPetIdParamsSchema.parse(request.params);
   const getPetProfile = makeGetPetInformationsUseCase();
   const { pet }  = await getPetProfile.execute({ id })
-
   return reply.status(200).send({ pet })
 }

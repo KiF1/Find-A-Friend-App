@@ -65,7 +65,6 @@ describe('Fetch Nearby Pet Use Case', () => {
       city: 'Olinda',
       page: 1
     })
-
     expect(pets).toHaveLength(2)
   })
 })

@@ -36,7 +36,7 @@ export class PrismaPetsRepository implements PetRepository{
   async findPetsInOrganizationById(orgId: string, page: number){
     const pet = await prisma.pet.findMany({ 
       where: {
-        id: orgId,
+        organization_id: orgId,
       },
       take: 20,
       skip: (page - 1) * 20

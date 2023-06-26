@@ -68,6 +68,8 @@ describe('Fetch Nearby Pet Use Case', () => {
       size: 'Médio'
     })
 
+    console.log(pets)
+
     expect(pets).toHaveLength(1)
   })
 })

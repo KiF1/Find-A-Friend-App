@@ -3,13 +3,13 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 
 export async function fetchNearbyPets(request: FastifyRequest, reply: FastifyReply){
-  const FetchNearbyBodySchema = z.object({
+  const FetchNearbySchema = z.object({
     state: z.string(),
     city: z.string(),
     page: z.string().transform(value => parseInt(value))
   })
 
-  const { state, city, page } = FetchNearbyBodySchema.parse(request.query);
+  const { state, city, page } = FetchNearbySchema.parse(request.query);
   const FetchNearbyPetUseCase = makeFetchNearbyPetUseCase();
   const { pets } = await FetchNearbyPetUseCase.execute({ state, city, page })
   

@@ -28,13 +28,13 @@ export class FilterPetByCaracteristicUseCase{
 
   async execute({ state, city, page, age, dependency_level, energy, size }: FilterPetByCaracteristicsUseCaseRequest): Promise<FilterPetByCaracteristicsUseCaseResponse>{
     const params: FilterByCaractristcs = { age, energy, size, dependency_level }
+    console.log(state, city, page, age, dependency_level, energy, size)
 
     const organizations = await this.organizationsRepository.findManyNearby(state, city);
     const petsNearby = (await Promise.all(organizations?.map(async (organization) => {
         return this.petsRepository.findPetsInOrganizationById(organization.id, page);
       }) ?? []
     )).flat();
-    console.log(params)
 
     const pets = await petsNearby.filter((item) => {
       for(const key in params){
