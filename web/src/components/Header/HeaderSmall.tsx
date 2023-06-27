@@ -1,7 +1,8 @@
 import Link from "next/link"
-import logo from "../assets/logo.png"
+import logo from "../../assets/logo.png"
 import { CornerDownLeft } from "lucide-react";
 import Image from "next/image";
+
 export function HeaderSmall(){
   return(
     <div className="w-full h-screen flex flex-col justify-between p-6 align-center bg-red-100">

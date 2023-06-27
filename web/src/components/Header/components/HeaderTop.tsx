@@ -20,10 +20,10 @@ export function HeaderTop(){
   });
 
   return (
-    <div className="flex p-12 flex-col gap-8 bg-red-100">
+    <div className="flex p-4 lg:p-12 flex-col gap-8 bg-red-100">
         <Image width={50} height={50} alt="logo" src={logo} />
-        <div className="flex items-center justify-between gap-2">
-          <select {...register('state')} className="w-20 h-12 border-[0.5px] rounded-2xl appearance-none border-white bg-red-100 text-center text-white placeholder-white focus:border-white focus:ring-0" id="estado" name="estado">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
+          <select {...register('state')} className="w-full lg:w-20 h-12 border-[0.5px] rounded-2xl appearance-none border-white bg-red-100 text-center text-white placeholder-white focus:border-white focus:ring-0" id="estado" name="estado">
             <option value="Acre">AC</option>
             <option value="Alagoas">AL</option>
             <option value="Amapá">AP</option>
@@ -53,12 +53,12 @@ export function HeaderTop(){
             <option value="Tocantins">TO</option>
           </select>
           <input {...register('city')}
-            className="h-12 rounded-2xl border-white bg-red-100 p-4 text-center text-white placeholder-white focus:border-white focus:ring-0"
+            className="w-full lg:w-fit h-12 rounded-2xl border-white bg-red-100 p-4 text-center text-white placeholder-white focus:border-white focus:ring-0"
             type="text"
             placeholder="Insira o nome da cidade"
           />
-          <button className="flex h-12 items-center rounded-xl border-0 bg-yellow px-4">
-            <Search color="#0D3B66" width={20} />
+          <button className="w-full lg:w-fit text-center flex h-12 items-center rounded-xl border-0 bg-yellow px-4">
+            <Search className="m-auto" color="#0D3B66" width={20} />
           </button>
         </div>
       </div>

@@ -19,7 +19,7 @@ export function HeaderBody(){
   });
 
   return (
-    <div className="flex px-12 py-8 flex-col gap-6 bg-red-50 h-full">
+    <div className="flex p-4 lg:px-12 lg:py-8 flex-col gap-6 bg-red-50 h-full">
       <h1 className="text-2xl text-white font-sans font-bold">Filtros</h1>
       <div className="flex flex-col gap-1">
         <span className="text-sm text-white">Idade</span>
