@@ -37,7 +37,9 @@ model Organization {
   address       String
   state         String
   cep           String
-  pets          Pet[]
+  photo         String
+
+  pets Pet[]
 
   @@map("organizations")
 }

@@ -24,6 +24,7 @@ describe('Register Organization Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password: '123456',
+      photo: 'ohoto.example'
     })
     expect(organization.id).toEqual(expect.any(String))
   })
@@ -39,6 +40,7 @@ describe('Register Organization Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password: '123456',
+      photo: 'example.com'
     })
     const isPasswordCorrectlyHashed = await compare('123456', organization.password_hash)
     expect(isPasswordCorrectlyHashed).toBe(true);
@@ -56,6 +58,7 @@ describe('Register Organization Use Case', () => {
       city: 'Olinda',
       email,
       password: '123456',
+      photo: 'example.com'
     })
     await expect(() => sut.execute({
       name: 'JavaScript Dogs',
@@ -67,6 +70,7 @@ describe('Register Organization Use Case', () => {
       city: 'Olinda',
       email,
       password: '123456',
+      photo: 'example.com'
     })).rejects.toBeInstanceOf(OrganizationAlreadyExistsError)
   })
 })

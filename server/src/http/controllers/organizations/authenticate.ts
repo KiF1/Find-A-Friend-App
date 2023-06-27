@@ -9,7 +9,6 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
     password: z.string().min(6),
   })
   const { email, password } = authenticateBodySchema.parse(request.body);
-  
   try {
     const authenticateUseCase = makeAuthenticateUseCase();
     const { organization } = await authenticateUseCase.execute({ email, password })

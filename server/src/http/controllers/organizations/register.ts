@@ -13,13 +13,14 @@ export async function register(request: FastifyRequest, reply: FastifyReply){
     state: z.string(),
     city: z.string(),
     address: z.string(),
-    cep: z.string()
+    cep: z.string(),
+    photo: z.string(),
   })
-  const { name, email, password, description, phone, state, city, address, cep } = registerBodySchema.parse(request.body);
+  const { name, email, password, description, phone, state, city, address, cep, photo } = registerBodySchema.parse(request.body);
   
   try {
     const registerUseCase = makeCreateOrganizationUseCase();
-    await registerUseCase.execute({name, email, password, description, phone, state, city, address, cep})
+    await registerUseCase.execute({name, email, password, description, phone, state, city, address, cep, photo})
   } catch (error) {
     if(error instanceof OrganizationAlreadyExistsError){
       return reply.status(409).send({ message: error.message })

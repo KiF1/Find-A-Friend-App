@@ -14,15 +14,16 @@ describe('Register (e2e)', () => {
   it('Shold be able to register organization', async () => {
     const response = await request(app.server).post('/organizations').send({
       name: 'JavaScript Dogs',
-      email: 'TypescriptDogs@example.com',
+      email: 'JhonDogs@example.com',
       description: 'JavaScript Organization',
       phone: '(81) 984421742',
       address: 'Rua Lajedo, 107',
       cep: '53250-510',
       state: 'Pernambuco',
       city: 'Olinda',
-      password: '123456'  
+      password: '123456',
+      photo: 'example.com'
     })
     expect(response.statusCode).toEqual(201)
   })
-})
+}) 

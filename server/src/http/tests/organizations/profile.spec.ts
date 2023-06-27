@@ -25,6 +25,7 @@ describe('Profile Origanization (e2e)', () => {
         city: 'Olinda',
         email: 'javascriptCats@example.com',
         password_hash: await hash('123456', 6),  
+        photo: 'example.com'
       }
     })
 

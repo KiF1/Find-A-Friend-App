@@ -32,6 +32,7 @@ describe('Fetch Nearby Pet Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
+      photo: 'example.com'
     })
 
     await createPet.execute({
@@ -67,9 +68,6 @@ describe('Fetch Nearby Pet Use Case', () => {
       age: 'Adulto',
       size: 'Médio'
     })
-
-    console.log(pets)
-
     expect(pets).toHaveLength(1)
   })
 })

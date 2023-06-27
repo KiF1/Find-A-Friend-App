@@ -15,6 +15,7 @@ export async function createAndAuthenticateOrganization(app: FastifyInstance){
       city: 'Olinda',
       email: 'PythonCats@example.com',
       password_hash: await hash('123456', 6),  
+      photo: 'example.com'
     }
   })
   const idOrganization = organization.id;

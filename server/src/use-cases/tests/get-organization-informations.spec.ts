@@ -1,11 +1,8 @@
 
-import { InMemoryPetsRepository } from '../../repositories/in-memory/in-memory-pets-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { CreatePetUseCase } from '../cases/create-pet'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
-import { GetPetInformationsUseCase } from '../cases/get-pet-informations'
 import { GetOrganizationInformationsUseCase } from '../cases/get-organization-informations'
 
 
@@ -28,6 +25,7 @@ describe('Register Pet Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
+      photo: 'example.com'
     })
   })
 

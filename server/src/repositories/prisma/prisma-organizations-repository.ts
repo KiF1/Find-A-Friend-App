@@ -24,6 +24,12 @@ export class PrismaOrganizationRepository implements OrganizationRepository{
     return organization
   }
 
+  async edit(id: string, data: Prisma.OrganizationUncheckedCreateInput){
+    const organization = await prisma.organization.update({ where: { id }, data })
+    return organization;
+  }
+
+
   async create(data: Prisma.OrganizationCreateInput){
     const organization = await prisma.organization.create({ data })
     return organization

@@ -13,6 +13,7 @@ interface CreateOrganizationUseCaseRequest {
   city: string
   address: string
   cep: string
+  photo: string
 }
 
 interface CreateOrganizationUseCaseResponse{
@@ -22,14 +23,14 @@ interface CreateOrganizationUseCaseResponse{
 export class CreateOrganizationUseCase{
   constructor(private organizationRepository: OrganizationRepository) {}
 
-  async execute({ name, email, password, description, phone, address, cep, city, state }: CreateOrganizationUseCaseRequest): Promise<CreateOrganizationUseCaseResponse>{
+  async execute({ name, email, password, description, phone, address, cep, city, state, photo }: CreateOrganizationUseCaseRequest): Promise<CreateOrganizationUseCaseResponse>{
     const password_hash = await  hash(password, 6);
     const userWithSomeEmail = await this.organizationRepository.findByEmail(email);
   
     if(userWithSomeEmail){
       throw new OrganizationAlreadyExistsError()
     }
-    const organization = await this.organizationRepository.create({ name, email, password_hash, description, phone, address, cep, city, state })
+    const organization = await this.organizationRepository.create({ name, email, password_hash, description, phone, address, cep, city, state, photo })
     return { organization }
   }
 }

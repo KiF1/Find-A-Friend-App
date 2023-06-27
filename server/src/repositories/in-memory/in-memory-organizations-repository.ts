@@ -29,6 +29,14 @@ export class InMemoryOrganizationsRepository implements OrganizationRepository{
     return organizations
   }
 
+  async edit(id: string, data: Prisma.OrganizationUncheckedCreateInput){
+    const organization = await this.items.findIndex((item) => item.id === id);
+    const updatedOrganization = { ...this.items[organization], ...data, created_at: new Date() };
+    this.items.splice(organization, 1, updatedOrganization);
+
+    return updatedOrganization
+  }
+
   async create(data: Prisma.OrganizationCreateInput){
     const organization = {
       id: data.id ?? randomUUID(),
@@ -41,6 +49,7 @@ export class InMemoryOrganizationsRepository implements OrganizationRepository{
       state: data.state,
       address: data.address,
       cep: data.cep,
+      photo: data.photo,
       created_at: new Date()
     }
     this.items.push(organization)
