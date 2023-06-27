@@ -2,7 +2,7 @@ import { PrismaOrganizationRepository } from "../../repositories/prisma/prisma-o
 import { AuthenticateUseCase } from "../cases/authenticate";
 
 export function makeAuthenticateUseCase(){
-  const organizationsRepository = new PrismaOrganizationRepository();
-  const useCase = new AuthenticateUseCase(organizationsRepository)
+  const organizationRepository = new PrismaOrganizationRepository();
+  const useCase = new AuthenticateUseCase(organizationRepository)
   return useCase
 }

@@ -1,6 +1,8 @@
 import request from "supertest";
 import { app } from "../../../app";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { prisma } from "@/lib/prisma";
+import { hash } from "bcryptjs";
 
 describe('Authenticate (e2e)', () => {
   beforeAll(async () => {
@@ -12,20 +14,23 @@ describe('Authenticate (e2e)', () => {
   })
 
   it('Shold be able to authenticate', async () => {
-    await request(app.server).post('/organizations').send({
-      name: 'JavaScript Dogs',
-      description: 'JavaScript Organization',
-      phone: '(81) 984421742',
-      address: 'Rua Lajedo, 107',
-      cep: '53250-510',
-      state: 'Pernambuco',
-      city: 'Olinda',
-      email: 'javascriptDogs@example.com',
-      password: '123456'  
+    await prisma.organization.create({
+      data: {
+        name: 'JavaScript Dogs',
+        description: 'JavaScript Organization',
+        phone: '(81) 984421742',
+        address: 'Rua Lajedo, 107',
+        cep: '53250-510',
+        state: 'Pernambuco',
+        city: 'Olinda',
+        email: 'javascriptCats@example.com',
+        password_hash: await hash('123456', 6),  
+        photo: 'example.com'
+      }
     })
 
     const response = await request(app.server).post('/sessions').send({
-      email: 'javascriptDogs@example.com',
+      email: 'javascriptCats@example.com',
       password: '123456',
     })
 

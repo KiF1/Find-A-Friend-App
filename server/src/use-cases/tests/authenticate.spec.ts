@@ -27,6 +27,7 @@ describe('Authenticate Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
+      photo: 'example.com'
     })
     const { organization } = await sut.execute({
       email: 'javascriptDogs@example.com',
@@ -55,6 +56,7 @@ describe('Authenticate Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
+      photo: 'example.com'
     })
 
     await expect(() =>
