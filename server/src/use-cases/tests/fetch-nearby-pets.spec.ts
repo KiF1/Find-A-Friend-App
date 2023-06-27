@@ -32,6 +32,7 @@ describe('Fetch Nearby Pet Use Case', () => {
       city: 'Olinda',
       email: 'javascriptDogs@example.com',
       password_hash: await hash('123456', 6),
+      photo: 'example.com'
     })
 
     await createPet.execute({

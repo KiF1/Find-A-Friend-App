@@ -1,6 +1,6 @@
 import { Organization, Prisma } from "@prisma/client"
 import { OrganizationRepository } from "@/repositories/interface/organizations-repository"
-import { InvalidCredentialsError } from "../errors/invalid-credentials-error"
+import { OrganizationNotExists } from "../errors/organization-not-exists"
 
 
 interface EditOrganizationUseCaseRequest {
@@ -18,7 +18,7 @@ export class EditOrganizationUseCase{
   async execute({ id, data }: EditOrganizationUseCaseRequest): Promise<EditOrganizationUseCaseResponse>{
     const organization = await this.organizationsRepository.findById(id);
     if(!organization){
-      throw new InvalidCredentialsError()
+      throw new OrganizationNotExists()
     }
 
     const organizationEdited = await this.organizationsRepository.edit(id, data);

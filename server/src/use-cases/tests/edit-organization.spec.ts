@@ -4,7 +4,7 @@ import { CreateOrganizationUseCase } from '../cases/create-organization'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
 import { EditOrganizationUseCase } from '../cases/edit-organization'
-import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
+import { OrganizationNotExists } from '../errors/organization-not-exists'
 
 
 let organizationRepository: InMemoryOrganizationsRepository
@@ -66,6 +66,6 @@ describe('Edit Organization Use Case', () => {
         password_hash: '123456',
         photo: 'example.com'
       }
-    })).rejects.toBeInstanceOf(InvalidCredentialsError)
+    })).rejects.toBeInstanceOf(OrganizationNotExists)
   })
 })

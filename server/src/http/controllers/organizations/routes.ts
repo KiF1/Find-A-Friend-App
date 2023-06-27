@@ -6,6 +6,7 @@ import { refresh } from "./refresh";
 import { profile } from "./profile";
 import { uploadLogo } from "./upload-logo";
 import { edit } from "./edit";
+import { petsInOrganization } from "./pets-in-organization";
 
 export async function organizationsRoutes(app: FastifyInstance){
   app.post('/organizations', register);
@@ -15,5 +16,6 @@ export async function organizationsRoutes(app: FastifyInstance){
   app.put('/organizations/:id', { onRequest: [verifyJwt] }, edit)
   app.patch('/token/refresh', refresh)
 
-  app.get('/organizations/:id', { onRequest: [verifyJwt] }, profile)
+  app.get('/organizations/:id', profile)
+  app.get('/organizations/:id/pets', petsInOrganization)
 }

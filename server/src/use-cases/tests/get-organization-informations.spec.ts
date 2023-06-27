@@ -2,8 +2,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryOrganizationsRepository } from '../../repositories/in-memory/in-memory-organizations-repository'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
 import { GetOrganizationInformationsUseCase } from '../cases/get-organization-informations'
+import { OrganizationNotExists } from '../errors/organization-not-exists'
 
 
 let organizationRepository: InMemoryOrganizationsRepository
@@ -39,6 +39,6 @@ describe('Register Pet Use Case', () => {
   it('Should not be able to get a specific Pet', async () => {
     await expect(() => sut.execute({
       id: 'pet-02',
-    })).rejects.toBeInstanceOf(InvalidCredentialsError)
+    })).rejects.toBeInstanceOf(OrganizationNotExists)
   })
 }) 
