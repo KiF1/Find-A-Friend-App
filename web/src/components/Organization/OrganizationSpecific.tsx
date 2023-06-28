@@ -1,11 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
-import whatsapp from "../assets/whats.png"
-import { PetsView } from "./Pets/PetsView";
-import { BoxInformations } from "./BoxInformations";
-import { ImageView } from "./ImageView";
-import { TitleComponent } from "./TitleComponent";
-import { WhatssapLink } from "./WhatssapLink";
+import { BoxInformations } from "../BoxInformations";
+import { ImageView } from "../ImageView";
+import { PetsView } from "../Pets/PetsView";
+import { TitleComponent } from "../TitleComponent";
+import { WhatssapLink } from "../WhatssapLink";
 export function OrganizationSpecific(){
   return(
     <div className="w-full ml-auto relative h-screen overflow-y-scroll flex">
@@ -22,6 +19,6 @@ export function OrganizationSpecific(){
             <WhatssapLink />
           </div>
        </div>
-      </div>
+    </div>
   )
 }

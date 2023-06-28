@@ -1,6 +1,6 @@
 
 import { HeaderSmall } from "@/components/Header/HeaderSmall";
-import { OrganizationSpecific } from "@/components/OrganizationSpecific";
+import { OrganizationSpecific } from "@/components/Organization/OrganizationSpecific";
 
 export default function Organization(){
   return(
