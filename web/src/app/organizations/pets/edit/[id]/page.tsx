@@ -1,9 +1,8 @@
-import { FormEditOrganization } from "@/components/FormEditOrganization";
 import { FormEditPet } from "@/components/FormEditPet";
 import { HeaderSmall } from "@/components/Header/HeaderSmall";
 import { TitleComponent } from "@/components/TitleComponent";
 
-export default function Edit(){
+export default function EditPet(){
   return (
     <div className="w-full grid grid-cols-[20%_80%] sm:grid-cols-[5%_95%] h-screen bg-pink">
       <HeaderSmall />
@@ -11,7 +10,7 @@ export default function Edit(){
         <div className="w-[85%] py-12 flex flex-col gap-6 absolute left-0 right-0 m-auto bg-white rounded-2xl">
           <div className="w-full m-auto lg:w-[70%] flex flex-col gap-8 p-8">
             <TitleComponent />
-            <FormEditOrganization />
+            <FormEditPet />
           </div>
         </div>
       </div>
